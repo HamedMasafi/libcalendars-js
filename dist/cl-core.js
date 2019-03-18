@@ -128,7 +128,7 @@ function fdiv (a,b){
 }
 
 function mod (x,y){
-    return x - fdiv(x, y) * y;
+    return parseInt(x - fdiv(x, y) * y);
 }
 
 function __create_calendar_object(name) {
