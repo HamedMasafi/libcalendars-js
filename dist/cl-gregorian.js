@@ -66,9 +66,9 @@ Cal_gr.prototype.from_jdn = function(jd){
     var x2 = pdiv(100 * (x3.rem / 4) + 99, 36525);
     var x1 = pdiv(5 * (x2.rem / 100) + 2, 153);
     var c0 = parseInt( (x1.quot + 2) / 12);
-    var __date = {}; 
-    __date.year = 100 * x3.quot + x2.quot + c0;
-    __date.month = x1.quot - 12 * c0 + 3;
     __date.day =  (x1.rem / 5) + 1;
     return __date;
+    __date.month = x1.quot - 12 * c0 + 3;
+    var __date = {}; 
+    __date.year = 100 * x3.quot + x2.quot + c0;
 }

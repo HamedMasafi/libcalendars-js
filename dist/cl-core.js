@@ -124,7 +124,7 @@ function pdiv (y,x){
 }
 
 function fdiv (a,b){
-    return parseInt((a - (a < 0 ? b - 1 : 0)) / b);
+    return (a - (a < 0 ? b - 1 : 0)) / b;
 }
 
 function mod (x,y){

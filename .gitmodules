@@ -1,0 +1,3 @@
+[submodule "libcalendars"]
+	path = libcalendars
+	url = https://github.com/soroush/libcalendars.git

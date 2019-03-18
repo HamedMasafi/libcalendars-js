@@ -13,7 +13,7 @@ math_fns.append("""function div(a, b) {
 }""")
 
 def proc_file(fn, name):
-        f = open(fn + ".c", 'r')
+        f = open("libcalendars/src/" + fn + ".c", 'r')
         content = f.read()
         var_re = "(u?int\d+\_t|int|size_t|div_t|double|float)"
         var_int_re = "(u?int\d+\_t|int|size_t)"
@@ -95,7 +95,7 @@ __calendars_list.push('%s');""") % (fn, name, name) + content
 
         #content = re.sub(r"\*([A-Za-z]+)", r"\1", content) 
         #print(content)
-        f = open(fn + ".js", 'w')
+        f = open("dist/" + fn + ".js", 'w')
         f.write(content)
         f.close()
         print(fn + ".js created")
@@ -113,7 +113,7 @@ f = open("calendars.js", 'r')
 core_class_content = f.read()
 f.close()
 
-f = open("cl-core.js", 'w')
+f = open("dist/cl-core.js", 'w')
 for fn in math_fns:
         f.write(fn + "\n")
 f.write(core_class_content)
