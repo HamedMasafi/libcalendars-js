@@ -3,14 +3,22 @@
 import re
 import os
 
-math_fns = []
+core_functions = {}
 
-math_fns.append("""function div(a, b) {
+core_functions["div"] = {
+        "type": "div_t",
+        "source": """() {
     return {
         quot: Math.floor(a / b),
         rem: a % b
-    }
-}""")
+    }"""
+}
+
+def proc_method(name, source):
+        if "int" in core_functions[name]["type"]: 
+                source = re.sub(r"return\s*((.|\n|\r)*)?;", r"return parseInt(\1);", source)
+        core_functions[name]["source"] = source
+        return "function %s %s\n}\n" % (name, source)
 
 def proc_file(fn, name):
         f = open("libcalendars/src/" + fn + ".c", 'r')
@@ -21,6 +29,7 @@ def proc_file(fn, name):
         token_re = "[a-zA-Z][A-Za-z0-9_]*"
         d_re = "year|month|day"
         fn_re = "function\s+(\w+)((.|\n)*?)\n\}\n"
+        fn_wt_re = "%s\s+(\w+)((.|\n)*?)\n\}\n" % var_re
         # init
         content = re.sub(r"static\s*", "", content)
         content = re.sub(r"const\s*", "", content)
@@ -32,6 +41,14 @@ def proc_file(fn, name):
         
         content = re.sub(r"\*year\s*\=", r"var __date = {}; \n    *year =", content)
         content = re.sub(r"\*day\s*\=(.*)\;", r"*day = \1;\n    return __date;", content)
+
+        fn_list_t = re.findall(r"%s" % fn_wt_re, content)
+        for f in fn_list_t:
+                core_functions[f[1]] = {
+                        "name": f[1],
+                        "type": f[0],
+                        "source": ""
+                }
 
         #parametere
         content = re.sub(r"(\,|\()\s*%s\*?\s*" % var_re, r"\1", content)
@@ -79,9 +96,8 @@ def proc_file(fn, name):
         content = re.sub(r"return\s*\n", "return ", content)
 
         fn_list = re.findall(r"%s" % fn_re, content)
-        # math_fns.extend(fn_list)
         for f in fn_list:
-                math_fns.append("function %s %s\n}\n" % (f[0], f[1]))
+                proc_method(f[0], f[1])
         content = re.sub(r"%s" % fn_re, r"//fn \1 removed from this file\n", content)
         if (name != ""):
                 content = ("""// generated from %s
@@ -114,8 +130,8 @@ core_class_content = f.read()
 f.close()
 
 f = open("dist/cl-core.js", 'w')
-for fn in math_fns:
-        f.write(fn + "\n")
-f.write(core_class_content)
+for fn, sc in core_functions.items():
+        if (sc["source"] != ""):
+                f.write("function %s %s\n}\n" % (fn, sc["source"]))
 f.close()
 print("Finished")
