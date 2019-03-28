@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Date converter</title>
+    </head>
+    <body>
+        <script src="../dist/cl-core.js"></script>
+        <script src="../dist/cl-gregorian.js"></script>
+        <script src="../dist/cl-islamic-civil.js"></script>
+        <script src="../dist/cl-jewish.js"></script>
+        <script src="../dist/cl-julian.js"></script>
+        <script src="../dist/cl-milankovic.js"></script>
+        <script src="../dist/cl-solar-hijri.js"></script>
+
+        <script src="test-utils.js"></script>
+
+        <a href="../index.htm">Back to index</a>
+        <form>
+            Select calendar:
+            <select id="cal"></select>
+            <br />
+            <button id="show">Show details!</button>
+            <p id="p"></p>
+        </form>
+        <script type="text/javascript" language="javascript">
+            fill_calendars("cal");
+
+            document.getElementById("show").onclick = function(){
+                var cal_name = document.getElementById("cal").value;
+                var c = new Calendar(cal_name, new Date());
+
+                document.getElementById("p").innerText = "";
+                
+                log("date", c.toString());
+                log("is valid", c.isValid());
+                log("is leap", c.isLeap());
+                log("jdn", c.julianDay());
+                log("month in year", c.monthsInYear(1397));
+                log("days in month", c.daysInMonth(1397, 12));
+                log("days in year", c.daysInYear(1397));
+                return false;
+            }
+        </script>
+    </body>
+</html>
