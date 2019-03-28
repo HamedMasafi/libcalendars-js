@@ -4,8 +4,6 @@
     </head>
     <body>
         <p id="p"></p>
-
-        <a href="test/converter.htm">Date converter</a>
         <script src="dist/cl-core.js"></script>
         <script src="dist/cl-gregorian.js"></script>
         <script src="dist/cl-islamic-civil.js"></script>
@@ -19,6 +17,15 @@
                     + s + ":</strong> " + s2 + "<br />";
             }
             var c = new Calendar("sh", new Date());
+
+            function test(a, b) {
+                var c1 = c.convert(a)
+                var c2 = c.convert(b).convert(a);
+                log("test " + a + " to " + b, 
+                    c1.toString() + " [] " + c2.toString()
+                    + "  => " +
+                    (c1.julianDay() === c2.julianDay()))
+            }
 
             function convert(ca) {
                 log("convert date to " + ca, c.convert(ca).toString())
@@ -40,6 +47,11 @@
                 convert(__calendars_list[i])
 
             log("==============", "")
+            for (var i = 0; i < __calendars_list.length; i++)
+                for (let j = 0; j < __calendars_list.length; j++) {
+                    if (__calendars_list[i] != __calendars_list[j])
+                    test(__calendars_list[i], __calendars_list[j])
+                }
 
             var d = new Date();
             for (var i = 0; i < __calendars_list.length; i++) {

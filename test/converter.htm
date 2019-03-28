@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Date converter</title>
+    </head>
+    <body>
+        <script src="../dist/cl-core.js"></script>
+        <script src="../dist/cl-gregorian.js"></script>
+        <script src="../dist/cl-islamic-civil.js"></script>
+        <script src="../dist/cl-jewish.js"></script>
+        <script src="../dist/cl-julian.js"></script>
+        <script src="../dist/cl-milankovic.js"></script>
+        <script src="../dist/cl-solar-hijri.js"></script>
+        <a href="../index.htm">Back to index</a>
+        <form>
+            Convert from:
+            <select id="from"></select>
+            <br />
+            Year:
+            <input type="number" id="y" />
+            Month:
+            <input type="number" id="m" />
+            Day:
+            <input type="number" id="d" />
+            <br />
+            Convert to:
+            <select id="to"></select>
+            <br />
+            <button id="convert">Convert!</button>
+            <p id="out"></p>
+        </form>
+        <script type="text/javascript" language="javascript">
+            function fill_calendars(el) {
+                var select = document.getElementById(el)
+                for (var i = 0; i < __calendars_list.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = __calendars_list[i];
+                    opt.innerText = __calendars_list[i];
+                    select.appendChild(opt);
+                }
+            }
+            fill_calendars("from");
+            fill_calendars("to");
+
+            document.getElementById("convert").onclick = function(){
+                var y = parseInt(document.getElementById("y").value);
+                var m = parseInt(document.getElementById("m").value);
+                var d = parseInt(document.getElementById("d").value);
+                var from = document.getElementById("from").value
+                var to = document.getElementById("to").value
+                var c = new Calendar(from, y, m, d);
+                var converted = c.convert(to);
+                document.getElementById("out").innerText = converted;
+                return false;
+            }
+        </script>
+    </body>
+</html>
