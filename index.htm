@@ -3,14 +3,6 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <script>
-            var CAL_GREGORIAN = 0
-            var CAL_JULIAN = 1
-            var CAL_MILANKOVIC = 2
-            var CAL_JEWSISH = 3
-            var CAL_SOLAR_HIJRI = 4
-            var CAL_ISLAMIC_CIVIL = 5;
-        </script>
         <p id="p"></p>
         <script src="dist/cl-core.js"></script>
         <script src="dist/cl-gregorian.js"></script>
@@ -21,9 +13,6 @@
         <script src="dist/cl-milankovic.js"></script>
         <script src="dist/cl-solar-hijri.js"></script>
         <script type="text/javascript" language="javascript">
-            // to_date(CAL_SOLAR_HIJRI, 2134234, d);
-            // console.log(JSON.stringify(d));
-            
             function log(s, s2) {
                 document.getElementById("p").innerHTML += "<strong>"
                     + s + ":</strong> " + s2 + "<br />";
