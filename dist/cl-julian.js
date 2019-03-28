@@ -5,7 +5,7 @@ function Cal_ju() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('ju');
+__calendars_list.push({nm: 'ju', name: 'julian'});
 
 Cal_ju.prototype.is_leap = function(year){
     if(year < 0) {

@@ -5,7 +5,7 @@ function Cal_sh() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('sh');
+__calendars_list.push({nm: 'sh', name: 'solar hijri'});
 
 
 

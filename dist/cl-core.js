@@ -113,13 +113,21 @@ function fdiv (a,b){
 function mod (x,y){
     return parseInt(x - fdiv(x, y) * y);
 }
+function __is_calendar_registered(cal) {
+    for (var i = 0; i < __calendars_list.length; i++)
+        if (__calendars_list[i].nm === cal)
+            return true;
+    return false;
+}
+
 function __create_calendar_object(name) {
-    if (__calendars_list.indexOf(name) === -1) 
+    if (!__is_calendar_registered(name))
         return false;
     var cc;
     eval("cc = new Cal_" + name + "()");
     return cc;
 }
+
 function Calendar(cal) {
     this.cal = __create_calendar_object(cal);
     this.jdn = false;

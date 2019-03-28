@@ -5,7 +5,7 @@ function Cal_jw() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('jw');
+__calendars_list.push({nm: 'jw', name: 'jewish'});
 
 Cal_jw.prototype.year_type = function(year){
     var qr = pdiv(7 * year - 6, 19);

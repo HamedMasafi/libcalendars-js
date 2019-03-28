@@ -5,7 +5,7 @@ function Cal_ml() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('ml');
+__calendars_list.push({nm: 'ml', name: 'milankovic'});
 
 Cal_ml.prototype.is_leap = function(year){
     if(year <= 0) {

@@ -109,7 +109,7 @@ function Cal_%s() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('%s');""") % (fn, name, name) + content
+__calendars_list.push({nm: '%s', name: '%s'});""") % (fn, name, name, fn.replace("cl-", "").replace("-", " ")) + content
 
         #content = re.sub(r"\*([A-Za-z]+)", r"\1", content) 
         #print(content)
