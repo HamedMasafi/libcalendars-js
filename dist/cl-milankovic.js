@@ -63,14 +63,14 @@ Cal_ml.prototype.is_valid = function(year,month,day){
     return 0;
 }
 Cal_ml.prototype.to_jdn = function(year,month,day){
+    if(year <= 0) {
+        ++year;
+    }
     var c0 ;
     var x1 = 0;
     var x2 = 0;
     var x3 = 0;
     var x4 = 0;
-    if(year <= 0) {
-        ++year;
-    }
     c0 = fdiv((month - 3) , 12);
     x1 = month - (12 * c0) - 3;
     x4 = year + c0;
@@ -82,6 +82,8 @@ Cal_ml.prototype.to_jdn = function(year,month,day){
           + day + 1721119;
 }
 Cal_ml.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var k3 = parseInt( 9 * (jd - 1721120) + 2);
     var x3 = parseInt( fdiv(k3, 328718));
     var k2 = parseInt( 100 * fdiv(mod(k3, 328718), 9) + 99);
@@ -90,13 +92,12 @@ Cal_ml.prototype.from_jdn = function(jd){
     var x1 = parseInt(
         fdiv(5 * fdiv(mod(k2, 36525), 100) + 2, 153));
     var c0 = parseInt( fdiv(x1 + 2, 12));
-    var __date = {}; 
     __date.year = (100 * x3 + x2 + c0);
     if(__date.year <= 0) {
         --(__date.year);
     }
     __date.month = (x1 - 12 * c0 + 3);
-    __date.day =  fdiv(mod(k1, 153), 5) + 1;
+    __date.day = fdiv(mod(k1, 153), 5) + 1;
     return __date;
 }
 Cal_ml.prototype.to_gr = function(j,g){

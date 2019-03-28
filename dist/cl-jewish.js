@@ -266,6 +266,8 @@ Cal_jw.prototype.to_jdn = function(year,month,day){
           * fdiv(x3 + 3, 12) + z4;
 }
 Cal_jw.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var y4 = parseInt( jd - 347821);
     var q = parseInt( fdiv(y4, 1447));
     var r = parseInt( mod(y4, 1447));
@@ -284,10 +286,9 @@ Cal_jw.prototype.from_jdn = function(jd){
     var mu_3 = parseInt( gamma_3 - fdiv(235 * xi_3 + 1, 19));
     var zeta_3 = parseInt( y4 - c4(xi_3, mu_3));
     var c = parseInt( fdiv(12 - mu_3, 7));
-    var __date = {}; 
     __date.year = xi_3 + 1 - c;
     __date.month = mu_3 + 1;
-    __date.day =  zeta_3 + 1;
+    __date.day = zeta_3 + 1;
     return __date;
 }
 Cal_jw.prototype.to_gr = function(j,g){

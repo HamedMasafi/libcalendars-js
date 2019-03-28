@@ -79,6 +79,8 @@ Cal_sh.prototype.to_jdn = function(year,month,day){
     return  f_d + d_y - 1;
 }
 Cal_sh.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var c = parseInt( cycle(jd));
     var y_c = parseInt( (Math.floor((jd - cycle_start(jd)) / year_length)));
     var y = parseInt( y_c + 475 + c * 2820);
@@ -98,10 +100,9 @@ Cal_sh.prototype.from_jdn = function(jd){
             break;
         }
     }
-    var __date = {}; 
     __date.year = y;
     __date.month = m;
-    __date.day =  d;
+    __date.day = d;
     return __date;
 }
 Cal_sh.prototype.to_gr = function(j,g){

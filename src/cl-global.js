@@ -95,3 +95,14 @@ Calendar.prototype.daysInMonth = function(y, m) {
 Calendar.prototype.daysInYear = function(y) {
     return this.cal.days_in_year(y);
 }
+
+var __date_toString = Date.prototype.toString
+
+Date.prototype.toString = function() {
+    if (arguments.length == 0)
+        return __date_toString();
+    else if (arguments.length == 1)
+        return __date_toString(arguments[0]);
+
+    return arguments[0];
+}

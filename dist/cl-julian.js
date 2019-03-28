@@ -51,33 +51,31 @@ Cal_ju.prototype.is_valid = function(year,month,day){
     return 0;
 }
 Cal_ju.prototype.to_jdn = function(year,month,day){
-    var c0 = 0;
-    var j1 = 0;
-    var j2 = 0;
     if(!year) {
         return  0;
     }
     if(year < 0) {
         ++year;
     }
-    c0 = fdiv(month - 3, 12);
-    j1 = fdiv(1461 * (year + c0), 4);
-    j2 = fdiv(153 * month - 1836 * c0 - 457, 5);
+    var c0 = parseInt( fdiv(month - 3, 12));
+    var j1 = parseInt( fdiv(1461 * (year + c0), 4));
+    var j2 = parseInt( fdiv(153 * month - 1836 * c0 - 457, 5));
     return  j1 + j2 + day + 1721117;
 }
 Cal_ju.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var y2 = parseInt( jd - 1721118);
     var k2 = parseInt( 4 * y2 + 3);
     var k1 = parseInt( 5 * fdiv(mod(k2, 1461), 4) + 2);
     var x1 = parseInt( fdiv(k1, 153));
     var c0 = parseInt( fdiv(x1 + 2, 12));
-    var __date = {}; 
     __date.year = (fdiv(k2, 1461) + c0);
     if(__date.year <= 0) {
         --(__date.year);
     }
     __date.month = (x1 - 12 * c0 + 3);
-    __date.day =  fdiv(mod(k1, 153), 5) + 1;
+    __date.day = fdiv(mod(k1, 153), 5) + 1;
     return __date;
 }
 Cal_ju.prototype.to_gr = function(j,g){

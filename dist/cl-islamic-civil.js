@@ -49,16 +49,17 @@ Cal_is.prototype.to_jdn = function(year,month,day){
           + day + 1948439;
 }
 Cal_is.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var k2 = parseInt( 30 * (jd - 1948440) + 15);
     var k1 = parseInt( 11 * fdiv(mod(k2, 10631), 30) + 5);
     var effective_year = parseInt( fdiv(k2, 10631) + 1);
     if(effective_year <= 0) {
         --effective_year;
     }
-    var __date = {}; 
     __date.year = effective_year;
     __date.month = fdiv(k1, 325) + 1;
-    __date.day =  fdiv(mod(k1, 325), 11) + 1;
+    __date.day = fdiv(mod(k1, 325), 11) + 1;
     return __date;
 }
 Cal_is.prototype.to_gr = function(j,g){

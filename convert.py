@@ -7,7 +7,7 @@ core_functions = {}
 
 core_functions["div"] = {
         "type": "div_t",
-        "source": """() {
+        "source": """(a, b) {
     return {
         quot: Math.floor(a / b),
         rem: a % b
@@ -39,8 +39,8 @@ def proc_file(fn, name):
         #     content = re.sub(r"\n\/\*\n", "", content)
         content = content.replace("LIBCALENDAR_API", "")
         
-        content = re.sub(r"\*year\s*\=", r"var __date = {}; \n    *year =", content)
-        content = re.sub(r"\*day\s*\=(.*)\;", r"*day = \1;\n    return __date;", content)
+        # content = re.sub(r"\*year\s*\=", r"var __date = {}; \n    *year =", content)
+        # content = re.sub(r"\*day\s*\=(.*)\;", r"*day = \1;\n    return __date;", content)
 
         fn_list_t = re.findall(r"%s" % fn_wt_re, content)
         for f in fn_list_t:
@@ -91,6 +91,8 @@ def proc_file(fn, name):
         # final
         content = content.replace("prototype.to_jdn = function(jd,year,month,day)", "prototype.to_jdn = function(year,month,day)")
         content = content.replace("prototype.from_jdn = function(jd,year,month,day)", "prototype.from_jdn = function(jd)")
+
+        content = re.sub(r"prototype\.from\_jdn\s*\=\s*function\(jd\)\{((.|\n)*?)\n\}\n", r"prototype.from_jdn = function(jd){\n    var __date = {};\n\1\n    return __date;\n}\n", content)
         content = re.sub(r"parse(Int|Float)\(\s*((\d|\.)*)\s*\)", r"\2", content)
 
         content = re.sub(r"return\s*\n", "return ", content)
@@ -125,7 +127,7 @@ proc_file("cl-milankovic", "ml")
 proc_file("cl-solar-hijri", "sh")
 proc_file("cl-math", "")
 
-f = open("calendars.js", 'r')
+f = open("src/cl-global.js", 'r')
 core_class_content = f.read()
 f.close()
 
@@ -133,5 +135,6 @@ f = open("dist/cl-core.js", 'w')
 for fn, sc in core_functions.items():
         if (sc["source"] != ""):
                 f.write("function %s %s\n}\n" % (fn, sc["source"]))
+f.write(core_class_content)
 f.close()
 print("Finished")

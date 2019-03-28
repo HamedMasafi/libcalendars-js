@@ -13,7 +13,6 @@
         </script>
         <p id="p"></p>
         <script src="dist/cl-core.js"></script>
-        <script src="dist/calendars.js"></script>
         <script src="dist/cl-gregorian.js"></script>
         <script src="dist/cl-islamic-civil.js"></script>
         <script src="dist/cl-jewish.js"></script>
@@ -65,6 +64,13 @@
                     if (__calendars_list[i] != __calendars_list[j])
                     test(__calendars_list[i], __calendars_list[j])
                 }
+
+            var d = new Date();
+            for (var i = 0; i < __calendars_list.length; i++) {
+                var cl_name = __calendars_list[i];
+                var converted_cal = new Calendar(cl_name, d);
+                log("Convert to " + cl_name, converted_cal.toString())
+            }
         </script>
     </body>
 </html>

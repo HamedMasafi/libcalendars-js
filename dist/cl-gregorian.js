@@ -62,13 +62,14 @@ Cal_gr.prototype.to_jdn = function(year,month,day){
           + day + 1721119;
 }
 Cal_gr.prototype.from_jdn = function(jd){
+    var __date = {};
+
     var x3 = pdiv(4 * jd - 6884477, 146097);
     var x2 = pdiv(100 * (x3.rem / 4) + 99, 36525);
     var x1 = pdiv(5 * (x2.rem / 100) + 2, 153);
     var c0 = parseInt( (x1.quot + 2) / 12);
-    __date.day =  (x1.rem / 5) + 1;
-    return __date;
+    __date.day = (x1.rem / 5) + 1;
     __date.month = x1.quot - 12 * c0 + 3;
-    var __date = {}; 
     __date.year = 100 * x3.quot + x2.quot + c0;
+    return __date;
 }
