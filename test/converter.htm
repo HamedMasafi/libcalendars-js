@@ -11,6 +11,9 @@
         <script src="../dist/cl-julian.js"></script>
         <script src="../dist/cl-milankovic.js"></script>
         <script src="../dist/cl-solar-hijri.js"></script>
+
+        <script src="test-utils.js"></script>
+
         <a href="../index.htm">Back to index</a>
         <form>
             Convert from:
@@ -30,15 +33,6 @@
             <p id="out"></p>
         </form>
         <script type="text/javascript" language="javascript">
-            function fill_calendars(el) {
-                var select = document.getElementById(el)
-                for (var i = 0; i < __calendars_list.length; i++) {
-                    var opt = document.createElement('option');
-                    opt.value = __calendars_list[i];
-                    opt.innerText = __calendars_list[i];
-                    select.appendChild(opt);
-                }
-            }
             fill_calendars("from");
             fill_calendars("to");
 

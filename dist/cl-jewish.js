@@ -108,7 +108,7 @@ Cal_jw.prototype.is_leap = function(year){
     return mod((7 * year + 1), 19) < 7 ? 1 : 0;
 }
 Cal_jw.prototype.is_complete = function(year){
-    switch(jw_year_type(year)) {
+    switch(this.year_type(year)) {
         case 2:
         case 5:
         case 7:
@@ -121,7 +121,7 @@ Cal_jw.prototype.is_complete = function(year){
     }
 }
 Cal_jw.prototype.is_deficient = function(year){
-    switch(jw_year_type(year)) {
+    switch(this.year_type(year)) {
         case 1:
         case 6:
         case 8:
@@ -133,7 +133,7 @@ Cal_jw.prototype.is_deficient = function(year){
     }
 }
 Cal_jw.prototype.is_regular = function(year){
-    switch(jw_year_type(year)) {
+    switch(this.year_type(year)) {
         case 3:
         case 5:
         case 10:
@@ -159,15 +159,15 @@ Cal_jw.prototype.days_in_month = function(month,year){
         case 7:
             return 30;
         case 8:
-            if(jw_is_regular(year) || this.is_deficient(year)) {
+            if(this.is_regular(year) || this.is_deficient(year)) {
                 return 29;
-            } else if(jw_is_complete(year)) {
+            } else if(this.is_complete(year)) {
                 return 30;
             }
         case 9:
-            if(jw_is_regular(year) || this.is_complete(year)) {
+            if(this.is_regular(year) || this.is_complete(year)) {
                 return 30;
-            } else if(jw_is_deficient(year)) {
+            } else if(this.is_deficient(year)) {
                 return 29;
             }
             break;
@@ -176,7 +176,7 @@ Cal_jw.prototype.days_in_month = function(month,year){
         case 11:
             return 30;
         case 12:
-            if(jw_is_leap(year)) {
+            if(this.is_leap(year)) {
                 
                 return 30;
             } else {
@@ -185,7 +185,7 @@ Cal_jw.prototype.days_in_month = function(month,year){
             }
             break;
         case 13:
-            if(jw_is_leap(year)) {
+            if(this.is_leap(year)) {
                 
                 return 29;
             } else {
@@ -202,20 +202,20 @@ Cal_jw.prototype.days_in_year = function(year){
     if(year == 0) {
         return 0;
     }
-    if(jw_is_leap(year)) {
-        if(jw_is_regular(year)) {
+    if(this.is_leap(year)) {
+        if(this.is_regular(year)) {
             return 354;
-        } else if(jw_is_complete(year)) {
+        } else if(this.is_complete(year)) {
             return 355;
-        } else if(jw_is_deficient(year)) {
+        } else if(this.is_deficient(year)) {
             return 353;
         }
     } else {
-        if(jw_is_regular(year)) {
+        if(this.is_regular(year)) {
             return 384;
-        } else if(jw_is_complete(year)) {
+        } else if(this.is_complete(year)) {
             return 385;
-        } else if(jw_is_deficient(year)) {
+        } else if(this.is_deficient(year)) {
             return 383;
         }
     }
@@ -225,7 +225,7 @@ Cal_jw.prototype.month_in_year = function(year){
     if(year == 0) {
         return 0;
     }
-    if(jw_is_leap(year)) {
+    if(this.is_leap(year)) {
         return 13;
     }
     return 12;

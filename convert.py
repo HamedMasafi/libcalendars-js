@@ -86,7 +86,7 @@ def proc_file(fn, name):
         # etc
         # content = re.sub(r"year\s*\=\s*([^;]*)\;(\n|\r|\s)+month\s*\=\s*([^;]*)\;(\n|\r|\s)+day\s*\=\s*([^;]*)\;", r"return {year: \1, month: \3, day: \5}", content)
         content = re.sub(r"function (\w{2})_(\S+)\(", r"Cal_\1.prototype.\2 = function(", content)
-        content = re.sub(r"\s%s_(%s)" % (name, token_re), r" this.\1", content)
+        content = re.sub(r"(\s|\()%s_(%s)" % (name, token_re), r"\1this.\2", content)
         content = re.sub(r"function jdn_to_(\w{2})", r"Cal_\1.prototype.from_jdn = function", content)
         # final
         content = content.replace("prototype.to_jdn = function(jd,year,month,day)", "prototype.to_jdn = function(year,month,day)")
