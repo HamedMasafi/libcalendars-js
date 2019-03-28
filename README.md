@@ -2,6 +2,8 @@
 
 The original code (written in c language) can be found here https://github.com/soroush/libcalendars
 
+Demo: https://hamedmasafi.github.io/libcalendars-js
+
 ## Installtion
 
 ```html
