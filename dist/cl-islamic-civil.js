@@ -5,7 +5,7 @@ function Cal_is() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('is');
+__calendars_list.push({nm: 'is', name: 'islamic civil'});
 
 Cal_is.prototype.is_leap = function(year){
     if(year < 0) {

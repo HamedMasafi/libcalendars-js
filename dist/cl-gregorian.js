@@ -5,7 +5,7 @@ function Cal_gr() {
 }
 if (__calendars_list == undefined)
         var __calendars_list = [];
-__calendars_list.push('gr');
+__calendars_list.push({nm: 'gr', name: 'gregorian'});
 
 Cal_gr.prototype.is_leap = function(year){
     if((year & 3) == 0 && ((year % 25) != 0 || (year & 15) == 0)) {

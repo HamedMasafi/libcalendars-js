@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <a href="../index.htm">Back to index</a>
+        
+        <p id="p"></p>
+        <p id="result"></p>
+        <script src="../dist/cl-core.js"></script>
+        <script src="../dist/cl-gregorian.js"></script>
+        <script src="../dist/cl-islamic-civil.js"></script>
+        <script src="../dist/cl-jewish.js"></script>
+        <script src="../dist/cl-julian.js"></script>
+        <script src="../dist/cl-milankovic.js"></script>
+        <script src="../dist/cl-solar-hijri.js"></script>
+
+        <script src="test-utils.js"></script>
+
+        <script type="text/javascript" language="javascript">
+            function log(s, s2) {
+                document.getElementById("p").innerHTML += "<strong>"
+                    + s + ":</strong> " + s2 + "<br />";
+            }
+            var c = new Calendar("sh", new Date());
+
+            var test_result = true;
+            function test(a, b) {
+                var c1 = c.convert(a)
+                var c2 = c.convert(b).convert(a);
+                var result = c1.julianDay() === c2.julianDay();
+
+                if (!result)
+                test_result = false;
+                log("Test " + a + " to " + b, result)
+            }
+
+            function convert(ca) {
+                log("convert date to " + ca, c.convert(ca).toString())
+            }
+
+            var calendars = calendar_codes();
+
+            for (var i = 0; i < calendars.length; i++)
+                for (let j = 0; j < calendars.length; j++) {
+                    if (calendars[i] != calendars[j])
+                    test(calendars[i], calendars[j])
+                }
+
+            document.getElementById("result").innerHTML = "<strong>Result: " + test_result + "</strong>";
+        </script>
+    </body>
+</html>
