@@ -70,6 +70,18 @@ Calendar.prototype.toDate = function() {
 
 }
 
+Calendar.prototype.year = function (){
+    return this.d.year;
+}
+
+Calendar.prototype.month = function (){
+    return this.d.month;
+}
+
+Calendar.prototype.day = function (){
+    return this.d.day;
+}
+
 Calendar.prototype.isLeap = function (){
     return this.cal.is_leap(this.d.year) === 1
 }

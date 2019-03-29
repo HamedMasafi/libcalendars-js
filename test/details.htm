@@ -35,9 +35,9 @@
                 log("is valid", c.isValid());
                 log("is leap", c.isLeap());
                 log("jdn", c.julianDay());
-                log("month in year", c.monthsInYear(1397));
-                log("days in month", c.daysInMonth(1397, 12));
-                log("days in year", c.daysInYear(1397));
+                log("month in year", c.monthsInYear(c.year()));
+                log("days in month", c.daysInMonth(c.year(), c.month()));
+                log("days in year", c.daysInYear(c.year()));
                 return false;
             }
         </script>
