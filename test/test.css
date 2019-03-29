@@ -1,0 +1,27 @@
+header {
+    background-color: #eee;
+    padding: 10px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+a:hover {
+    color: maroon;
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #777;
+    padding: 10px;
+    border: 1px solid #666;
+    text-align: center;   
+    color: white;
+}
+
+footer a {
+    color: aqua;
+}

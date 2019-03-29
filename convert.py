@@ -14,11 +14,26 @@ core_functions["div"] = {
     }"""
 }
 
+def read_file(fn):
+        f = open(fn, 'r')
+        content = f.read()
+        f.close()
+        return content
+
 def proc_method(name, source):
         if "int" in core_functions[name]["type"]: 
                 source = re.sub(r"return\s*((.|\n|\r)*)?;", r"return parseInt(\1);", source)
         core_functions[name]["source"] = source
         return "function %s %s\n}\n" % (name, source)
+
+def create_html(title, fn, out):
+        content = read_file(fn)
+        f = open(out, 'w')
+        content = html_header + content + html_footer
+        content = content.replace("==title==", title)
+        f.write(content)
+        f.close()
+        print("Html file %s created" % out)
 
 def proc_file(fn, name):
         f = open("libcalendars/src/" + fn + ".c", 'r')
@@ -131,9 +146,14 @@ proc_file("cl-milankovic", "ml")
 proc_file("cl-solar-hijri", "sh")
 proc_file("cl-math", "")
 
-f = open("src/cl-global.js", 'r')
-core_class_content = f.read()
-f.close()
+core_class_content = read_file("src/cl-global.js")
+html_header = read_file("src/header.inc.htm")
+html_footer = read_file("src/footer.inc.htm")
+
+create_html("libcalendar-js", "src/index.htm", "index.htm")
+create_html("Date converter", "src/converter.htm", "test/converter.htm")
+create_html("Test", "src/test.htm", "test/test.htm")
+create_html("Date details", "src/details.htm", "test/details.htm")
 
 f = open("dist/cl-core.js", 'w')
 for fn, sc in core_functions.items():
@@ -141,4 +161,5 @@ for fn, sc in core_functions.items():
                 f.write("function %s %s\n}\n" % (fn, sc["source"]))
 f.write(core_class_content)
 f.close()
+
 print("Finished")
