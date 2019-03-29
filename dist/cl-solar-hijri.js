@@ -23,7 +23,8 @@ var leap_threshold = 0.24219858156028368;
 Cal_sh.prototype.is_leap = function(year){
     var integral ;
     var frac ;
-    frac = modf((year + 2346) * leap_threshold, integral);
+    frac = Math.floor((year + 2346) * leap_threshold);
+    integral = parseInt((year + 2346) * leap_threshold);
     if(frac < leap_threshold) {
         return 1;
     } else {

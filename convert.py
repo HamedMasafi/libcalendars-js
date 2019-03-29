@@ -81,7 +81,8 @@ def proc_file(fn, name):
         # Math
         content = re.sub(r"(\W)floor(\W)", r"\1Math.floor\2", content)
         # content = re.sub(r"(\W)modf(\W)", r"\1mod\2", content)
-        content = re.sub(r"var (%s) \= parseFloat\(\s*modf\((%s)\, (%s)\)\)\;" % (token_re, token_re, token_re), r"var \1 = Math.floor(\2);\n    \3 = parseInt(\2);", content)
+        content = re.sub(r"(%s) \= parseFloat\(\s*modf\((%s)\, (%s)\)\)\;" % (token_re, token_re, token_re), r"\1 = Math.floor(\2);\n    \3 = parseInt(\2);", content)
+        content = re.sub(r"(%s) \=\s*modf\((.*)?\, (.*)?\)\;" % token_re, r"\1 = Math.floor(\2);\n    \3 = parseInt(\2);", content)
         #         var k = k_p - Math.floor(k_p);// parseFloat( mod(k_p, i));
         #     i = parseInt(k_p);
         # content = re.sub(r"(\W)div\(\s*(\w+)\s*,\s*(\w+)\s*\)(\W)", r"\1\2 % \3\4", content)
