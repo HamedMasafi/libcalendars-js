@@ -36,6 +36,11 @@
             fill_calendars("from");
             fill_calendars("to");
 
+            var d = new Date();
+            document.getElementById("y").value = d.getFullYear()
+            document.getElementById("m").value = d.getMonth() + 1;
+            document.getElementById("d").value = d.getDate();
+
             document.getElementById("convert").onclick = function(){
                 var y = parseInt(document.getElementById("y").value);
                 var m = parseInt(document.getElementById("m").value);
