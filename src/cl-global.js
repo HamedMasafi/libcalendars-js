@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function __is_calendar_registered(cal) {
     for (var i = 0; i < __calendars_list.length; i++)
         if (__calendars_list[i].nm === cal)
@@ -7,6 +8,16 @@ function __is_calendar_registered(cal) {
 
 function __create_calendar_object(name) {
     if (!__is_calendar_registered(name))
+=======
+function __calendar_is_registered(name) {
+    for (let i = 0; i < __calendars_list.length; i++) 
+        if (__calendars_list[i].nm === name)
+            return true;
+    return false;
+}
+function __calendar_create_object(name) {
+    if (!__calendar_is_registered(name)) 
+>>>>>>> master
         return false;
     var cc;
     eval("cc = new Cal_" + name + "()");
@@ -14,7 +25,7 @@ function __create_calendar_object(name) {
 }
 
 function Calendar(cal) {
-    this.cal = __create_calendar_object(cal);
+    this.cal = __calendar_create_object(cal);
     this.jdn = false;
 
     if (this.cal === false) {
@@ -70,6 +81,18 @@ Calendar.prototype.toString = function() {
 
 Calendar.prototype.toDate = function() {
 
+}
+
+Calendar.prototype.year = function (){
+    return this.d.year;
+}
+
+Calendar.prototype.month = function (){
+    return this.d.month;
+}
+
+Calendar.prototype.day = function (){
+    return this.d.day;
 }
 
 Calendar.prototype.isLeap = function (){

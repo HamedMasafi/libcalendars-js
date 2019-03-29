@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="test/test.css" />
     </head>
     <body>
         <p id="p"></p>
@@ -8,6 +9,9 @@
         <a href="test/converter.htm">Date converter</a>
         |
         <a href="test/details.htm">Date details</a>
+        |
+        <a href="test/test.htm">Tests</a>
+
         <script src="dist/cl-core.js"></script>
         <script src="dist/cl-gregorian.js"></script>
         <script src="dist/cl-islamic-civil.js"></script>
@@ -15,6 +19,8 @@
         <script src="dist/cl-julian.js"></script>
         <script src="dist/cl-milankovic.js"></script>
         <script src="dist/cl-solar-hijri.js"></script>
+
+        <script src="test/test-utils.js"></script>
         <script type="text/javascript" language="javascript">
             function log(s, s2) {
                 document.getElementById("p").innerHTML += "<strong>"
@@ -26,6 +32,11 @@
                 log("convert date to " + ca, c.convert(ca).toString())
             }
             
+<<<<<<< HEAD
+=======
+            log("Calendars names", JSON.stringify(calendar_names()))
+            log("Calendars codes", JSON.stringify(calendar_codes()))
+>>>>>>> master
             log("date", c.toString());
             log("is valid", c.isValid());
             log("is leap", c.isLeap());

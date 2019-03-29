@@ -11,7 +11,8 @@ Cal_jw.prototype.year_type = function(year){
     var qr = pdiv(7 * year - 6, 19);
     var k_p = parseFloat( 0.178117457 * year + 0.777965458 * qr.rem + 0.2533747);
     var i ;
-    var k = parseFloat( mod(k_p, i));
+    var k = Math.floor(k_p);
+    i = parseInt(k_p);
     if(qr.rem < 5) {
         if(k >= 0.752248) {
             return 7;
