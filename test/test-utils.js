@@ -3,7 +3,11 @@ function fill_calendars(el) {
     for (var i = 0; i < __calendars_list.length; i++) {
         var opt = document.createElement('option');
         opt.value = __calendars_list[i].nm;
+<<<<<<< HEAD
+        opt.innerText = __calendars_list[i].name + "(" + __calendars_list[i].nm + ")";
+=======
         opt.innerText = __calendars_list[i].name + " (" + __calendars_list[i].nm + ")";
+>>>>>>> master
         select.appendChild(opt);
     }
 }
