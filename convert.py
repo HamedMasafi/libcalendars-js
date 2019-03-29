@@ -4,7 +4,8 @@ import re
 import os
 
 core_functions = {}
-
+html_header = ""
+html_footer = ""
 core_functions["div"] = {
         "type": "div_t",
         "source": """(a, b) {
@@ -26,14 +27,14 @@ def proc_method(name, source):
         core_functions[name]["source"] = source
         return "function %s %s\n}\n" % (name, source)
 
-def create_html(title, fn, out):
-        content = read_file(fn)
-        f = open(out, 'w')
+def create_html(title, fn):
+        content = read_file("src/" + fn)
+        f = open(fn, 'w')
         content = html_header + content + html_footer
         content = content.replace("==title==", title)
         f.write(content)
         f.close()
-        print("Html file %s created" % out)
+        print("Html file %s created" % fn)
 
 def proc_file(fn, name):
         f = open("libcalendars/src/" + fn + ".c", 'r')
@@ -150,10 +151,10 @@ core_class_content = read_file("src/cl-global.js")
 html_header = read_file("src/header.inc.htm")
 html_footer = read_file("src/footer.inc.htm")
 
-create_html("libcalendar-js", "src/index.htm", "index.htm")
-create_html("Date converter", "src/converter.htm", "test/converter.htm")
-create_html("Test", "src/test.htm", "test/test.htm")
-create_html("Date details", "src/details.htm", "test/details.htm")
+create_html("libcalendar-js", "index.htm")
+create_html("Date converter", "converter.htm")
+create_html("Test", "test.htm")
+create_html("Date details", "details.htm")
 
 f = open("dist/cl-core.js", 'w')
 for fn, sc in core_functions.items():
