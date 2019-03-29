@@ -113,17 +113,7 @@ function fdiv (a,b){
 function mod (x,y){
     return parseInt(x - fdiv(x, y) * y);
 }
-<<<<<<< HEAD
-function __is_calendar_registered(cal) {
-    for (var i = 0; i < __calendars_list.length; i++)
-        if (__calendars_list[i].nm === cal)
-            return true;
-    return false;
-}
 
-function __create_calendar_object(name) {
-    if (!__is_calendar_registered(name))
-=======
 function __calendar_is_registered(name) {
     for (let i = 0; i < __calendars_list.length; i++) 
         if (__calendars_list[i].nm === name)
@@ -132,7 +122,6 @@ function __calendar_is_registered(name) {
 }
 function __calendar_create_object(name) {
     if (!__calendar_is_registered(name)) 
->>>>>>> master
         return false;
     var cc;
     eval("cc = new Cal_" + name + "()");
